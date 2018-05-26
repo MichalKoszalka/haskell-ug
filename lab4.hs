@@ -59,6 +59,9 @@ gcd2 n m = gcd2 m (mod n m)
 --najwiekszy wspolny dzielnik dla listy elementow przy pomocy fold
 nwdFold [] = 0
 nwdFold (x:xs) = foldl gcd2 x (xs)
---
+--delete with fold
 delete2 [] z = []
-delete2 (x:xs) z = foldr (\y (x:xs) -> if y == z then (x:xs) else y:(x:xs)) [] (x:xs)
+delete2 (x:xs) z = foldr (\a b -> if a==z then b else (a:b)) [] (x:xs)
+--map with fold
+map3 [] f = []
+map3 (x:xs) f = foldr (\a b -> (f a):b) [] (x:xs)
