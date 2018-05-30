@@ -38,17 +38,20 @@ palindrom (x:xs) = (x:xs) == (reverse(x:xs))
 -- 3. Niech b¦dzie dany nast¦puj¡cy typ drzew.
 -- data Tree a b = Leaf a | Node a b (Tree a b) (Tree a b)
 data Tree a b = Leaf a | Node a b (Tree a b) (Tree a b)
+sampleTree = Node 10 'a' (Leaf 1) (Node 2 'b' (Node 1 'c' (Leaf 2) (Leaf 5)) (Leaf 1))
 -- a) (3) Prosz¦ zdeniowa¢ funkcj¦ sumTree t, która obliczy sum¦ elementów
 -- typu a w drzewie t.
 -- sumTree :: Tree a b -> Integer
--- sumTree :: Tree a -> Integer
-sumTree (Leaf a) = 1
-sumTree (Node a b) = (sumTree a) + (sumTree b)
+sumTree (Leaf a) = a
+sumTree (Node a b t1 t2) = a + (sumTree t1) + (sumTree t2)
 -- b) (3) Prosz¦ zdeniowa¢ funkcj¦ preTree t, której warto±ci¡ jest lista elementów
 -- drzewa t w porz¡dku preksowym.
-
+preTree (Leaf a) = [a]
+preTree (Node a b t1 t2) = [a] ++ (preTree t1) ++ (preTree t2)
 -- c) (3) Prosz¦ zdeniowa¢ funkcj¦ mapb f t, która zastosuje funkcj¦ f do wszystkich
 -- elementów typu b.
+mapTree f (Leaf a) = (Leaf a)
+mapTree f (Node a b t1 t2) = Node a (f b) (mapTree f t1) (mapTree f t2)
 
 -- Nale»y te» podac typy zdeniowanych funkcji.
 -- 4. a) (3) Prosz¦ obliczy¢ typ wyra»enia \f → fx.
